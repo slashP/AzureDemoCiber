@@ -16,7 +16,7 @@ namespace AzureDemoCiber.Controllers
         public ActionResult About()
         {
             ViewBag.Message = "Your application description page.";
-
+            new SendgridService().Send("per-kristian.helland@ciber.com", "Jula kommer tidlig i år", "Have fun with all the presents");
             return View();
         }
 
