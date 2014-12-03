@@ -20,6 +20,13 @@ namespace AzureDemoCiber.Controllers
             return View();
         }
 
+        [Route("loaderio-4a7315c6ee6211a9fa91a016323601e5")]
+        public ActionResult As()
+        {
+            var path = HttpContext.Server.MapPath("~/App_Data/loaderio-4a7315c6ee6211a9fa91a016323601e5.txt");
+            return new FileContentResult(System.IO.File.ReadAllBytes(path), "text/plain");
+        }
+
         public ActionResult Contact()
         {
             ViewBag.Message = "Your contact page.";
