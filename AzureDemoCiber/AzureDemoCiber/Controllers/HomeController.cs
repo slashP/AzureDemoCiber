@@ -34,6 +34,7 @@ namespace AzureDemoCiber.Controllers
             return View();
         }
 
+        [Route("images/{container?}")]
         public ActionResult Images(string container = null)
         {
             var urls = container == null ? Enumerable.Empty<string>() : new AzureBlobService().GetUrls(container);
