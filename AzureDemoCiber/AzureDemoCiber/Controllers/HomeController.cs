@@ -40,7 +40,7 @@ namespace AzureDemoCiber.Controllers
             return View(urls);
         }
 
-        [Route("imageUpload")]
+        [Route("imageUpload/{container}")]
         public async Task<string> ImageUpload(string container)
         {
             await new AzureBlobService().UploadAsync(container, Request.Files[0].InputStream);
