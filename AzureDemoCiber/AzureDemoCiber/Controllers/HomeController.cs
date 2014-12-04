@@ -1,8 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Web.Mvc;
+
+using AzureDemoCiber.Services;
 
 namespace AzureDemoCiber.Controllers
 {
@@ -23,8 +24,7 @@ namespace AzureDemoCiber.Controllers
         [Route("loaderio-4a7315c6ee6211a9fa91a016323601e5")]
         public ActionResult As()
         {
-            var path = HttpContext.Server.MapPath("~/App_Data/loaderio-4a7315c6ee6211a9fa91a016323601e5.txt");
-            return new FileContentResult(System.IO.File.ReadAllBytes(path), "text/plain");
+            return new FileContentResult(Encoding.UTF8.GetBytes("loaderio-4a7315c6ee6211a9fa91a016323601e5"), "text/plain");
         }
 
         public ActionResult Contact()
@@ -32,6 +32,19 @@ namespace AzureDemoCiber.Controllers
             ViewBag.Message = "Your contact page.";
 
             return View();
+        }
+
+        public ActionResult Images(string container = null)
+        {
+            var urls = container == null ? Enumerable.Empty<string>() : new AzureBlobService().GetUrls(container);
+            return View(urls);
+        }
+
+        [Route("imageUpload")]
+        public async Task<string> ImageUpload(string container)
+        {
+            await new AzureBlobService().UploadAsync(container, Request.Files[0].InputStream);
+            return "ok";
         }
     }
 }
