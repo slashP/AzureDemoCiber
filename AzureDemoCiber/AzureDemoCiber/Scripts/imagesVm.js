@@ -19,7 +19,7 @@
         xhr.onreadystatechange = function() {
             if (xhr.readyState == 4) {
                 console.log(xhr.responseText);
-                window.location.refresh();
+                window.location.reload();
             }
         };
         xhr.send(formData);
